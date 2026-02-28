@@ -1,7 +1,7 @@
 [project]
-name = "saucedemo-robot-tests"
+name = "ecommerce-webapp-tests"
 version = "1.0.0"
-description = "Robot Framework test automation suite for Saucedemo application"
+description = "Robot Framework test automation suite for the E-Commerce web application"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [

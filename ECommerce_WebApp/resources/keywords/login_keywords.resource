@@ -10,7 +10,7 @@ Resource    ../locators/inventory_locators.resource
 
 *** Keywords ***
 Login To Application
-    [Documentation]    Logs in to the Saucedemo application with provided credentials.
+    [Documentation]    Logs in to the application with provided credentials.
     ...                Handles browser popups and waits for inventory page to load.
     [Arguments]    ${username}    ${password}
     Wait For Element And Input Text    ${LOGIN_USERNAME_INPUT}    ${username}

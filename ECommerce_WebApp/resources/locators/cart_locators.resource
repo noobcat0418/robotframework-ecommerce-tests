@@ -1,6 +1,6 @@
 *** Comments ***
 # Cart Page Locators
-# This file contains all locators for the shopping cart page of Saucedemo application.
+# This file contains all locators for the shopping cart page of the web application.
 
 *** Variables ***
 # Cart Page Elements

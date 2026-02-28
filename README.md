@@ -1,6 +1,6 @@
-# Robotframework saucedemo Test Automation Suite
+# E-Commerce Web Application - Test Automation Suite
 
-Automated test suite for [Saucedemo](https://www.saucedemo.com/) - a sample e-commerce web application by Sauce Labs. This project demonstrates end-to-end test automation using **Robot Framework** with **Python** and **SeleniumLibrary**.
+Automated end-to-end test suite for the client's E-Commerce web application. This project covers critical business workflows including user authentication, product catalog management, shopping cart operations, and the complete checkout process using **Robot Framework** with **Python** and **SeleniumLibrary**.
 
 ![Robot Framework](https://img.shields.io/badge/Robot%20Framework-000000?style=flat&logo=robot-framework&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
@@ -15,24 +15,22 @@ Automated test suite for [Saucedemo](https://www.saucedemo.com/) - a sample e-co
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Running Tests](#running-tests)
-- [Test Scenarios](#test-scenarios)
+- [Test Coverage](#test-coverage)
 - [Reports](#reports)
-- [Contributing](#contributing)
 - [Author](#author)
 
 ---
 
 ## About the Project
 
-This repository contains automated test cases for the Saucedemo web application, covering critical e-commerce functionalities including:
+This repository contains the automated test suite for the E-Commerce web application, covering critical business functionalities:
 
-- User Authentication (login/logout)
-- Product Catalog browsing and sorting
-- Shopping Cart operations
-- Checkout workflow
-- Form validations and error handling
+- **Authentication** - Login validation, error handling, account restrictions
+- **Product Catalog** - Display verification, sorting, add-to-cart operations
+- **Shopping Cart** - Item management, price verification, badge updates
+- **Checkout** - End-to-end purchase flow, price/tax validation, form validation
 
-The project follows a **keyword-driven** approach with reusable keywords and resource files for maintainable test automation.
+The project follows a **keyword-driven** architecture with reusable keywords, page-object-style locator files, and centralized test data for maintainable and scalable test automation.
 
 ---
 
@@ -43,7 +41,9 @@ The project follows a **keyword-driven** approach with reusable keywords and res
 | Language | Python 3.x |
 | Framework | Robot Framework |
 | Browser Automation | SeleniumLibrary |
-| Browser | Chrome / Firefox |
+| Browser | Chrome (Incognito) |
+| Static Analysis | Robocop |
+| Code Formatting | Robotidy |
 | Reporting | Robot Framework HTML Reports |
 | Version Control | Git |
 
@@ -52,29 +52,39 @@ The project follows a **keyword-driven** approach with reusable keywords and res
 ## Project Structure
 
 ```
-Saucedemo-Testcases/
-├── tests/                       # Test suite files
-│   ├── login_tests.robot
-│   ├── product_tests.robot
-│   ├── cart_tests.robot
-│   └── checkout_tests.robot
+ECommerce_WebApp/
+├── TestCases/                       # Test suite files (10 files, 35 test cases)
+│   ├── TC_AUTH_001.robot            #   Authentication - Valid Login (3 TCs)
+│   ├── TC_AUTH_002.robot            #   Authentication - Error Handling (4 TCs)
+│   ├── TC_PRODUCT_001.robot         #   Product Catalog - Display (3 TCs)
+│   ├── TC_PRODUCT_002.robot         #   Product Catalog - Sorting (4 TCs)
+│   ├── TC_PRODUCT_003.robot         #   Product Catalog - Add to Cart (3 TCs)
+│   ├── TC_CART_001.robot            #   Shopping Cart - Item Management (4 TCs)
+│   ├── TC_CART_002.robot            #   Shopping Cart - Price Verification (3 TCs)
+│   ├── TC_CHECKOUT_001.robot        #   Checkout - Complete Purchase Flow (3 TCs)
+│   ├── TC_CHECKOUT_002.robot        #   Checkout - Price & Tax Validation (4 TCs)
+│   └── TC_CHECKOUT_003.robot        #   Checkout - Form Validation (4 TCs)
 ├── resources/
-│   ├── keywords/                # Custom keyword files
-│   │   ├── login_keywords.robot
-│   │   ├── product_keywords.robot
-│   │   ├── cart_keywords.robot
-│   │   └── checkout_keywords.robot
-│   ├── locators/                # Element locators
-│   │   └── locators.robot
-│   └── common.robot             # Common keywords and setup
-├── data/                        # Test data
-│   └── test_data.robot
-├── results/                     # Generated test reports
+│   ├── keywords/                    # Reusable keyword libraries
+│   │   ├── common_keywords.resource
+│   │   ├── login_keywords.resource
+│   │   ├── inventory_keywords.resource
+│   │   ├── cart_keywords.resource
+│   │   └── checkout_keywords.resource
+│   └── locators/                    # Page element locators
+│       ├── login_locators.resource
+│       ├── inventory_locators.resource
+│       ├── cart_locators.resource
+│       └── checkout_locators.resource
+├── data/                            # Test data and configuration
+│   └── test_data.resource
+├── log/                             # Generated test reports
 │   ├── log.html
 │   ├── report.html
 │   └── output.xml
-├── requirements.txt             # Python dependencies
-└── README.md
+├── requirements.txt
+├── pyproject.toml
+└── .robocop
 ```
 
 ---
@@ -85,48 +95,37 @@ Saucedemo-Testcases/
 
 - Python 3.8 or higher
 - pip (Python package manager)
-- Chrome or Firefox browser
-- ChromeDriver or GeckoDriver
+- Chrome browser
+- ChromeDriver
 - Git
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   # Downloads the project files from GitHub to your local machine
-   git clone https://github.com/noobcat0418/Saucedemo-Testcases.git
+   git clone <repository-url>
    ```
 
 2. **Navigate to project directory**
    ```bash
-   # Changes your current directory to the project folder
-   cd Saucedemo-Testcases
+   cd ECommerce_WebApp
    ```
 
 3. **Create virtual environment (recommended)**
    ```bash
-   # Creates an isolated Python environment for this project
    python -m venv venv
-   
-   # Activates the virtual environment (Windows)
+
+   # Windows
    venv\Scripts\activate
-   
-   # Activates the virtual environment (Mac/Linux)
+
+   # Mac/Linux
    source venv/bin/activate
    ```
 
 4. **Install dependencies**
    ```bash
-   # Installs all required Python packages from requirements.txt
    pip install -r requirements.txt
    ```
-
-### Requirements.txt
-```
-robotframework>=6.0
-robotframework-seleniumlibrary>=6.0
-webdrivermanager
-```
 
 ---
 
@@ -134,83 +133,95 @@ webdrivermanager
 
 ### Run all tests
 ```bash
-# Executes all .robot test files in the tests directory
-robot tests/
+robot --outputdir log TestCases/
 ```
 
-### Run specific test file
+### Run specific test suite
 ```bash
-# Runs only the login test suite
-robot tests/login_tests.robot
+robot --outputdir log TestCases/TC_AUTH_001.robot
 ```
 
 ### Run tests by tag
 ```bash
-# Runs only tests tagged as 'smoke'
-robot --include smoke tests/
+# Run smoke tests only
+robot --include smoke --outputdir log TestCases/
 
-# Runs all tests except those tagged as 'wip' (work in progress)
-robot --exclude wip tests/
-```
+# Run regression tests
+robot --include regression --outputdir log TestCases/
 
-### Run with custom output directory
-```bash
-# Saves all reports to the 'results' folder
-robot --outputdir results tests/
-```
+# Run authentication-related tests
+robot --include authentication --outputdir log TestCases/
 
-### Run in headless mode
-```bash
-# Runs tests without opening a visible browser window
-robot --variable BROWSER:headlesschrome tests/
+# Exclude work-in-progress tests
+robot --exclude wip --outputdir log TestCases/
 ```
 
 ### Run specific test case by name
 ```bash
-# Executes only the test case matching the given name
-robot --test "Valid Login With Standard User" tests/
+robot --test "TC_001: Login With Standard User Credentials" --outputdir log TestCases/
+```
+
+### Run with verbose output
+```bash
+robot --loglevel DEBUG --outputdir log TestCases/
 ```
 
 ---
 
-## Test Scenarios
+## Test Coverage
 
-### Authentication Tests
-| Test Case | Description | Tag |
-|-----------|-------------|-----|
-| Valid Login With Standard User | Login with valid credentials | smoke |
-| Invalid Login With Wrong Password | Verify error message for wrong password | regression |
-| Login With Locked Out User | Verify locked user cannot login | regression |
-| Login With Empty Credentials | Verify validation for empty fields | regression |
-| Successful Logout | Verify user can logout | smoke |
+### Authentication Tests (TC_AUTH_001, TC_AUTH_002)
+| ID | Test Case | Type | Tag |
+|----|-----------|------|-----|
+| TC_001 | Login With Standard User Credentials | Positive | smoke |
+| TC_002 | Verify Product Catalog Loads After Login | Positive | smoke |
+| TC_003 | Verify Correct Number Of Products Displayed | Positive | regression |
+| TC_004 | Verify Locked Account Cannot Access Application | Negative | regression |
+| TC_005 | Verify Error On Invalid Password | Negative | regression |
+| TC_006 | Verify Error When Username Is Empty | Negative | regression |
+| TC_007 | Verify Error When Password Is Empty | Negative | regression |
 
-### Product Tests
-| Test Case | Description | Tag |
-|-----------|-------------|-----|
-| Verify All Products Displayed | Check all 6 products are visible | smoke |
-| Sort Products By Price Low To High | Verify price sorting ascending | regression |
-| Sort Products By Price High To Low | Verify price sorting descending | regression |
-| Sort Products By Name A To Z | Verify alphabetical sorting | regression |
-| View Product Details | Click product and verify details page | smoke |
+### Product Catalog Tests (TC_PRODUCT_001 - TC_PRODUCT_003)
+| ID | Test Case | Type | Tag |
+|----|-----------|------|-----|
+| TC_008 | Verify All Products Displayed On Catalog Page | Positive | smoke |
+| TC_009 | Verify Product Count Matches Expected Total | Positive | smoke |
+| TC_010 | Verify Each Product Has Complete Details | Positive | regression |
+| TC_011 | Sort Products By Name A To Z | Functional | regression |
+| TC_012 | Sort Products By Name Z To A | Functional | regression |
+| TC_013 | Sort Products By Price Low To High | Functional | regression |
+| TC_014 | Sort Products By Price High To Low | Functional | regression |
+| TC_015 | Add Single Product To Cart From Catalog | Positive | smoke |
+| TC_016 | Add Multiple Products To Cart | Positive | smoke |
+| TC_017 | Add All Available Products To Cart | Positive | regression |
 
-### Cart Tests
-| Test Case | Description | Tag |
-|-----------|-------------|-----|
-| Add Single Item To Cart | Add one product to cart | smoke |
-| Add Multiple Items To Cart | Add several products to cart | smoke |
-| Remove Item From Cart | Remove product from cart | regression |
-| Verify Cart Badge Count | Check cart icon shows correct count | regression |
-| Continue Shopping From Cart | Return to products from cart | regression |
+### Shopping Cart Tests (TC_CART_001, TC_CART_002)
+| ID | Test Case | Type | Tag |
+|----|-----------|------|-----|
+| TC_018 | Navigate To Cart And Verify Products Present | Positive | smoke |
+| TC_019 | Verify Product Quantities In Cart | Positive | regression |
+| TC_020 | Remove Product From Cart | Functional | smoke |
+| TC_021 | Return To Product Catalog From Cart | Navigation | regression |
+| TC_022 | Verify Cart Prices Match Catalog Prices | Positive | smoke |
+| TC_023 | Verify Cart Badge Reflects Item Count | Positive | regression |
+| TC_024 | Verify Cart Item Count Matches Added Products | Positive | regression |
 
-### Checkout Tests
-| Test Case | Description | Tag |
-|-----------|-------------|-----|
-| Complete Checkout Successfully | Full checkout with valid info | smoke |
-| Checkout With Missing First Name | Verify first name validation | regression |
-| Checkout With Missing Last Name | Verify last name validation | regression |
-| Checkout With Missing Postal Code | Verify postal code validation | regression |
-| Verify Order Summary | Check item totals and tax | regression |
-| Cancel Checkout | Verify cancel returns to cart | regression |
+### Checkout Tests (TC_CHECKOUT_001 - TC_CHECKOUT_003)
+| ID | Test Case | Type | Tag |
+|----|-----------|------|-----|
+| TC_025 | Complete Checkout With Valid Information | E2E | smoke |
+| TC_026 | Verify Order Confirmation Message | Positive | smoke |
+| TC_027 | Return To Product Catalog After Checkout | Navigation | regression |
+| TC_028 | Verify Checkout Summary Subtotal | Positive | regression |
+| TC_029 | Verify Tax Calculation Is Present | Positive | regression |
+| TC_030 | Verify Total Equals Subtotal Plus Tax | Positive | regression |
+| TC_031 | Verify Total Updates After Removing Product | Functional | regression |
+| TC_032 | Checkout With Missing First Name | Negative | regression |
+| TC_033 | Checkout With Missing Last Name | Negative | regression |
+| TC_034 | Checkout With Missing Postal Code | Negative | regression |
+| TC_035 | Cancel Checkout And Return To Cart | Navigation | regression |
+
+**Total: 35 Test Cases** | Smoke: 12 | Regression: 23
 
 ---
 
@@ -218,85 +229,31 @@ robot --test "Valid Login With Standard User" tests/
 
 Robot Framework automatically generates HTML reports after each test run.
 
-### Default Report Location
-After running tests, find reports in the project root or specified output directory:
-
 | File | Description |
 |------|-------------|
 | `report.html` | High-level test summary with pass/fail statistics |
 | `log.html` | Detailed step-by-step execution log |
 | `output.xml` | Machine-readable output for CI/CD integration |
 
-### Generate reports in custom directory
-```bash
-# Outputs all report files to the 'results' folder
-robot --outputdir results tests/
-```
-
 ### Open report after test run
 ```bash
-# Windows - opens the HTML report in default browser
-start results/report.html
+# Windows
+start log/report.html
 
 # Mac
-open results/report.html
+open log/report.html
 
 # Linux
-xdg-open results/report.html
+xdg-open log/report.html
 ```
-
----
-
-## Sample Test Code
-
-```robot
-*** Settings ***
-Library     SeleniumLibrary
-Resource    ../resources/common.robot
-Resource    ../resources/keywords/login_keywords.robot
-
-Suite Setup       Open Browser To Login Page
-Suite Teardown    Close All Browsers
-
-*** Test Cases ***
-Valid Login With Standard User
-    [Tags]    smoke    login
-    Enter Username    standard_user
-    Enter Password    secret_sauce
-    Click Login Button
-    Verify Products Page Is Displayed
-
-Invalid Login With Wrong Password
-    [Tags]    regression    login
-    Enter Username    standard_user
-    Enter Password    wrong_password
-    Click Login Button
-    Verify Error Message    Epic sadface: Username and password do not match
-```
-
----
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-test`)
-3. Commit changes (`git commit -m 'Add new test case'`)
-4. Push to branch (`git push origin feature/new-test`)
-5. Open a Pull Request
 
 ---
 
 ## Author
 
-**Mike Ryan Cervantes**  
+**Mike Ryan Cervantes**
 Senior QA Automation Engineer
 
 - GitHub: [@noobcat0418](https://github.com/noobcat0418)
 - LinkedIn: [Mikeryan Cervantes](https://www.linkedin.com/in/mikeryan-cervantes)
 - Email: cervantesmikeryan24@gmail.com
-
----
-
-⭐ If you found this project helpful, please give it a star!

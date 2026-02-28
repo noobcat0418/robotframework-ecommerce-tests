@@ -1,6 +1,6 @@
 *** Comments ***
 # Checkout Page Locators
-# This file contains all locators for the checkout pages of Saucedemo application.
+# This file contains all locators for the checkout pages of the web application.
 
 *** Variables ***
 # Checkout Information Form

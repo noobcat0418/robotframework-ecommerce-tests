@@ -1,6 +1,6 @@
 *** Comments ***
 # Login Page Locators
-# This file contains all locators for the login page of Saucedemo application.
+# This file contains all locators for the login page of the web application.
 
 *** Variables ***
 # Login Page Elements

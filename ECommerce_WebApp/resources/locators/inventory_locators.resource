@@ -1,6 +1,6 @@
 *** Comments ***
 # Inventory Page Locators
-# This file contains all locators for the inventory/products page of Saucedemo application.
+# This file contains all locators for the inventory/products page of the web application.
 
 *** Variables ***
 # Inventory Page Elements

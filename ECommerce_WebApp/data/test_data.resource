@@ -10,19 +10,11 @@ ${BASE_URL}                  https://www.saucedemo.com/
 ${VALID_USERNAME}            standard_user
 ${VALID_PASSWORD}            secret_sauce
 
-# Locked Out User
+# Restricted User Accounts
 ${LOCKED_USERNAME}           locked_out_user
-
-# Problem User
 ${PROBLEM_USERNAME}          problem_user
-
-# Performance Glitch User
 ${GLITCH_USERNAME}           performance_glitch_user
-
-# Error User
 ${ERROR_USERNAME}            error_user
-
-# Visual User
 ${VISUAL_USERNAME}           visual_user
 
 # Product Names
@@ -33,10 +25,19 @@ ${PRODUCT_FLEECE_JACKET}     Sauce Labs Fleece Jacket
 ${PRODUCT_ONESIE}            Sauce Labs Onesie
 ${PRODUCT_RED_TSHIRT}        Test.allTheThings() T-Shirt (Red)
 
-# Checkout Test Data
+# Checkout Information
 ${CHECKOUT_FIRST_NAME}       John
 ${CHECKOUT_LAST_NAME}        Cruz
 ${CHECKOUT_POSTAL_CODE}      12345
 
-# Expected Product Count
+# Expected Values
 ${EXPECTED_PRODUCT_COUNT}    6
+
+# Error Messages
+${ERR_LOCKED_USER}           Epic sadface: Sorry, this user has been locked out.
+${ERR_INVALID_CREDS}         Epic sadface: Username and password do not match any user in this service
+${ERR_EMPTY_USERNAME}        Epic sadface: Username is required
+${ERR_EMPTY_PASSWORD}        Epic sadface: Password is required
+${ERR_MISSING_FIRST_NAME}    Error: First Name is required
+${ERR_MISSING_LAST_NAME}     Error: Last Name is required
+${ERR_MISSING_POSTAL}        Error: Postal Code is required
